@@ -9,10 +9,28 @@ execute:
 
 New York City
 
-```{r}
+```{r, fig.width=10, fig.height=7}
 library(tidyverse)
 nyc_tracts <- read_csv("data/nyc_tracts.csv")
-nyc_tracts
+nyc_tracts %>%
+  drop_na(med_income) %>%
+  ggplot(aes(x = race, y = med_income, fill = race)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA) +
+  geom_jitter(width = 0.2, alpha = 0.2, size = 1, color = "black") +
+  scale_y_continuous(labels = scales::dollar_format()) +
+  labs(
+    title = "Median Income by Race Across NYC Census Tracts",
+    subtitle = "White tracts tend to have higher median incomes; variation exists within all groups",
+    x = "Race",
+    y = "Median Income",
+    fill = "Race",
+    caption = "Source: NYC_tracts data"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "none"
+  )
 ```
 
 This is a Quarto website.
