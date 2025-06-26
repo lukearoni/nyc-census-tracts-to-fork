@@ -7,7 +7,7 @@ execute:
     message: false
 ---
 
-New York City
+## Data Graph
 
 ```{r, fig.width=10, fig.height=7}
 library(tidyverse)
